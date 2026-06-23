@@ -24,7 +24,7 @@ if ( class_exists( '\Automattic\WooCommerce\Blocks\Payments\Integrations\Abstrac
 
             wp_register_script(
                 $handle,
-                plugin_dir_url( __FILE__ ) . '../assets/js/blocks/checkout.js',
+                plugins_url( 'assets/js/blocks/checkout.js', dirname( __FILE__ ) ),
                 [
                     'wc-blocks-registry',
                     'wc-settings',
@@ -37,7 +37,7 @@ if ( class_exists( '\Automattic\WooCommerce\Blocks\Payments\Integrations\Abstrac
             );
 
             if ( function_exists( 'wp_set_script_translations' ) ) {
-                wp_set_script_translations( $handle, Application::TEXT_DOMAIN, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+                wp_set_script_translations( $handle, Application::TEXT_DOMAIN, dirname( __DIR__ ) . '/languages' );
 
             }
             return [ $handle ];

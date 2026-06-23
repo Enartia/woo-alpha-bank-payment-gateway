@@ -36,10 +36,8 @@ class Application {
     }
 
     public function declare_transactions() {
-        global $wpdb;
-
         if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class) ) {
-            \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( $wpdb->prefix . 'alphabank_transactions', $this->entrypoint_path, true );
+            \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', $this->entrypoint_path, true );
         }
     }
 
@@ -53,22 +51,13 @@ class Application {
         }
 
         if ( 'alphabank_gateway' === $payment_method && is_order_received_page() ) {
-            $alphabank_message = '';
-            if ( method_exists( $order, 'get_meta' ) ) {
-                $alphabank_message = $order->get_meta( '_alphabank_message', true );
-            } else {
-                $alphabank_message = get_post_meta( $order_id, '_alphabank_message', true );
-            }
+            $alphabank_message = $order->get_meta( '_alphabank_message', true );
 
             if ( ! empty( $alphabank_message ) ) {
                 $message      = $alphabank_message['message'];
                 $message_type = $alphabank_message['message_type'];
-                if ( method_exists( $order, 'delete_meta_data' ) ) {
-                    $order->delete_meta_data( '_alphabank_message' );
-                    $order->save_meta_data();
-                } else {
-                    delete_post_meta( $order_id, '_alphabank_message' );
-                }
+                $order->delete_meta_data( '_alphabank_message' );
+                $order->save_meta_data();
                 wc_add_notice( $message, $message_type );
             }
         }

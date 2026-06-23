@@ -32,6 +32,7 @@ class WC_AlphaBank_Gateway_Masterpass extends WC_AlphaBank_Gateway_Base {
             $this->ab_transactionType        = $alpha_settings['ab_transactionType'];
             $this->redirect_page_id          = $alpha_settings['redirect_page_id'];
             $this->ab_order_note             = $alpha_settings['ab_order_note'];
+            $this->ab_enable_log             = $alpha_settings['ab_enable_log'] ?? 'no';
         }
 
         add_action( 'woocommerce_receipt_alphabank_masterpass', array( $this, 'receipt_page' ) );

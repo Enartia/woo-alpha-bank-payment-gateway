@@ -24,7 +24,7 @@ class WC_AlphaBank_Gateway_Base extends \WC_Payment_Gateway {
     const PLUGIN_TITLE          = Application::PLUGIN_TITLE;
     const TEXT_DOMAIN           = Application::TEXT_DOMAIN;
     public const ENCRYPTION_METHOD     = 'aes-128-cbc';
-    public const ENCRYPTION_KEY_LENGTH = 16; // 128-bit key for AES-128
+    public const ENCRYPTION_KEY_LENGTH = 32; // 32-byte NONCE_KEY slice; cipher is AES-128 (matches the 2.0.x storage format — do NOT switch to AES-256)
 
     protected string $notify_url;
     protected ?string $redirect_page_id;
@@ -159,13 +159,9 @@ class WC_AlphaBank_Gateway_Base extends \WC_Payment_Gateway {
 
         $order = new \WC_Order( $order_id );
 
-        if ( method_exists( $order, 'get_meta' ) ) {
-            $installments = $order->get_meta( '_doseis' );
-            if ( $installments === '' ) {
-                $installments = 1;
-            }
-        } else {
-            $installments = get_post_meta( $order_id, '_doseis', 1 );
+        $installments = $order->get_meta( '_doseis' );
+        if ( $installments === '' ) {
+            $installments = 1;
         }
 
         $country    = $order->get_billing_country();
@@ -380,12 +376,8 @@ class WC_AlphaBank_Gateway_Base extends \WC_Payment_Gateway {
      */
     public function generic_add_meta( $orderid, $key, $value ) {
         $order = new \WC_Order( $orderid );
-        if ( method_exists( $order, 'add_meta_data' ) && method_exists( $order, 'save_meta_data' ) ) {
-            $order->add_meta_data( $key, $value, true );
-            $order->save_meta_data();
-        } else {
-            update_post_meta( $orderid, $key, $value );
-        }
+        $order->add_meta_data( $key, $value, true );
+        $order->save_meta_data();
     }
 
     /**
