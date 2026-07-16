@@ -23,17 +23,18 @@ class WC_AlphaBank_Gateway_Masterpass extends WC_AlphaBank_Gateway_Base {
         $this->title       = sanitize_text_field( $this->get_option( 'masterpass_title' ) );
         $this->description = sanitize_text_field( $this->get_option( 'masterpass_description' ) );
 
-        if ( $alpha_settings = get_option( 'woocommerce_alphabank_gateway_settings' ) ) {
-            $this->ab_merchantId             = $alpha_settings['ab_merchantId'];
-            $this->ab_sharedSecretKey        = $alpha_settings['ab_sharedSecretKey'];
-            $this->ab_environment            = $alpha_settings['ab_environment'];
-            $this->ab_installments           = $alpha_settings['ab_installments'];
-            $this->ab_installments_variation = $alpha_settings['ab_installments_variation'];
-            $this->ab_transactionType        = $alpha_settings['ab_transactionType'];
-            $this->redirect_page_id          = $alpha_settings['redirect_page_id'];
-            $this->ab_order_note             = $alpha_settings['ab_order_note'];
-            $this->ab_enable_log             = $alpha_settings['ab_enable_log'] ?? 'no';
-        }
+        $alpha_settings = get_option( 'woocommerce_alphabank_gateway_settings', [] );
+        $this->ab_merchantId             = $alpha_settings['ab_merchantId'] ?? '';
+        $this->ab_sharedSecretKey        = $alpha_settings['ab_sharedSecretKey'] ?? '';
+        $this->ab_environment            = $alpha_settings['ab_environment'] ?? 'yes';
+        $this->ab_installments           = (int) ( $alpha_settings['ab_installments'] ?? 1 );
+        $this->ab_installments_variation = $alpha_settings['ab_installments_variation'] ?? '';
+        $this->ab_transactionType        = $alpha_settings['ab_transactionType'] ?? 'no';
+        $this->redirect_page_id          = $alpha_settings['redirect_page_id'] ?? null;
+        $this->ab_order_note             = $alpha_settings['ab_order_note'] ?? 'no';
+        $this->ab_enable_log             = $alpha_settings['ab_enable_log'] ?? 'no';
+        $this->ab_render_logo            = $alpha_settings['ab_render_logo'] ?? 'yes';
+        $this->ab_allowMasterpass        = $alpha_settings['ab_allowMasterpass'] ?? 'yes';
 
         add_action( 'woocommerce_receipt_alphabank_masterpass', array( $this, 'receipt_page' ) );
         add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
