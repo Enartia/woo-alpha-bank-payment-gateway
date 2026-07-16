@@ -199,7 +199,7 @@ class WC_AlphaBank_Gateway_Base extends \WC_Payment_Gateway {
             'version'     => $version,
             'mid'         => $this->ab_merchantId,
             'lang'        => $lang,
-            'orderid'     => $order_id . 'at' . date( 'Ymdhisu' ),
+            'orderid'     => $order_id . 'at' . wp_date( 'Ymdhisu' ),
             'orderDesc'   => 'Order #' . $order_id,
             'orderAmount' => $order->get_total(),
             'currency'    => $currency,
@@ -477,9 +477,14 @@ class WC_AlphaBank_Gateway_Base extends \WC_Payment_Gateway {
 
     public function get_option( $key, $empty_value = null ) {
         $option_value = parent::get_option( $key, $empty_value );
-        if ( $key == 'ab_sharedSecretKey' ) {
-            $decrypted    = $this->decrypt( base64_decode( $option_value ), substr( NONCE_KEY, 0, static::ENCRYPTION_KEY_LENGTH ) );
-            $option_value = $decrypted;
+        if ( $key == 'ab_sharedSecretKey' && ! empty( $option_value ) ) {
+            $decoded = base64_decode( $option_value, true );
+            if ( $decoded !== false ) {
+                $decrypted    = $this->decrypt( $decoded, substr( NONCE_KEY, 0, static::ENCRYPTION_KEY_LENGTH ) );
+                $option_value = $decrypted !== false ? $decrypted : '';
+            } else {
+                $option_value = '';
+            }
         }
         return $option_value;
     }

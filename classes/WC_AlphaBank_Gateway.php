@@ -14,7 +14,7 @@ class WC_AlphaBank_Gateway extends WC_AlphaBank_Gateway_Base {
         $this->id                 = 'alphabank_gateway';
         $this->notify_url         = WC()->api_request_url( 'WC_AlphaBank_Gateway' );
         $this->method_description = __( static::PLUGIN_TITLE . ' allows you to accept payment through various channels such as Visa, Mastercard, Maestro, American Express, Diners, Discover cards on your Woocommerce Powered Site.', static::TEXT_DOMAIN );
-        $this->redirect_page_id   = intval( $this->get_option( 'redirect_page_id' ) );
+        $this->redirect_page_id   = (string) intval( $this->get_option( 'redirect_page_id' ) );
         $this->method_title       = static::PLUGIN_TITLE;
 
         // Load the form fields.
@@ -32,9 +32,9 @@ class WC_AlphaBank_Gateway extends WC_AlphaBank_Gateway_Base {
         $this->ab_installments_variation = sanitize_text_field( $this->get_option( 'ab_installments_variation' ) );
         $this->ab_transactionType        = sanitize_text_field( $this->get_option( 'ab_transactionType' ) );
         $this->ab_allowMasterpass        = sanitize_text_field( $this->get_option( 'ab_allowMasterpass' ) );
-        $this->ab_render_logo            = $this->get_option( 'ab_render_logo' );
+        $this->ab_render_logo            = sanitize_text_field( $this->get_option( 'ab_render_logo' ) );
         $this->ab_enable_log             = sanitize_text_field( $this->get_option( 'ab_enable_log' ) );
-        $this->ab_order_note             = $this->get_option( 'ab_order_note' );
+        $this->ab_order_note             = sanitize_text_field( $this->get_option( 'ab_order_note' ) );
 
         //Actions
         add_action( 'woocommerce_receipt_alphabank_gateway', array( $this, 'receipt_page' ) );
