@@ -3,7 +3,7 @@
   Plugin Name: Payment Gateway – nexi Alpha Bank for WooCommerce
   Plugin URI: https://www.papaki.com
   Description: Payment Gateway – nexi Alpha Bank for WooCommerce allows you to accept payment through various channels such as American Express, Visa, Mastercard, Maestro, Diners Club cards On your Woocommerce Powered Site.
-  Version: 2.1.0
+  Version: 2.1.1
   Author: Papaki
   Author URI: https://www.papaki.com
   License: GPL-3.0+
