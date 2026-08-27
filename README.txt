@@ -4,7 +4,7 @@ Author URI: https://www.papaki.com
 Tags: ecommerce, woocommerce, payment gateway, alphabank, alpha
 Tested up to: 6.8.3
 Requires at least: 4.0
-Stable tag: 2.1.1
+Stable tag: 2.2.0
 WC tested up to: 10.2.2
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -43,6 +43,11 @@ In order to enable MasterPass you should go to Woocommerce Payment methods and e
 
 
 == Changelog ==
+
+= 2.2.0 =
+Added required device category and installment fields to payment requests
+Updated response digest verification to use Cardlink's fixed field order and raw values
+Updated the plugin branding and description to include IRIS payments
 
 = 2.1.1 =
 Fixed PHP 8.x compatibility issues: uninitialized typed properties, decryption guard on empty secret key, deprecated date() replaced with wp_date(), and redirect_page_id type mismatch.

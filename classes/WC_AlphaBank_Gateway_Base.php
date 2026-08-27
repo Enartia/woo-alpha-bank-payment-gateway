@@ -199,6 +199,7 @@ class WC_AlphaBank_Gateway_Base extends \WC_Payment_Gateway {
             'version'     => $version,
             'mid'         => $this->ab_merchantId,
             'lang'        => $lang,
+            'deviceCategory' => '0',
             'orderid'     => $order_id . 'at' . wp_date( 'Ymdhisu' ),
             'orderDesc'   => 'Order #' . $order_id,
             'orderAmount' => $order->get_total(),
@@ -210,6 +211,8 @@ class WC_AlphaBank_Gateway_Base extends \WC_Payment_Gateway {
             'billCity'    => $order->get_billing_city(),
             'billAddress' => $order->get_billing_address_1(),
             'trType'      => $trType,
+            'extInstallmentoffset' => null,
+            'extInstallmentperiod' => null,
             'confirmUrl'  => get_site_url() . "/?wc-api=WC_alphabank_Gateway&result=success",
             'cancelUrl'   => get_site_url() . "/?wc-api=WC_alphabank_Gateway&result=failure",
             'var2'        => $order_id,
@@ -309,17 +312,42 @@ class WC_AlphaBank_Gateway_Base extends \WC_Payment_Gateway {
         $status     = sanitize_text_field( $_POST['status'] );
         $message    = isset( $_POST['message'] ) ? sanitize_text_field( $_POST['message'] ) : '';
         $paymentRef = isset( $_POST['paymentRef'] ) ? sanitize_text_field( $_POST['paymentRef'] ) : '';
-        $digest     = sanitize_text_field( $_POST['digest'] );
+        $digest     = isset( $_POST['digest'] ) ? (string) $_POST['digest'] : '';
 
-        $form_data = '';
-        foreach ($_POST as $k => $v) {
-            if ( ! in_array( $k, array( '_charset_', 'digest', 'submitButton' ) ) ) {
-                $form_data  .= sanitize_text_field( $v );
-            }
+        $fields_for_digest = array(
+            'version',
+            'mid',
+            'orderid',
+            'status',
+            'orderAmount',
+            'currency',
+            'paymentTotal',
+            'message',
+            'riskScore',
+            'payMethod',
+            'txId',
+            'paymentRef',
+        );
+
+        $concat = '';
+        foreach ( $fields_for_digest as $field ) {
+            $concat .= isset( $_POST[ $field ] )
+                ? (string) wp_unslash( $_POST[ $field ] )
+                : '';
         }
 
-        $form_data       .= $this->ab_sharedSecretKey;
-        $computed_digest  = $this->calculate_digest( $form_data );
+        $form_data      = iconv( 'UTF-8', 'UTF-8//IGNORE', $concat ) . $this->ab_sharedSecretKey;
+        $computed_digest = $this->calculate_digest( $form_data );
+
+        $this->safe_log(
+            'DIGEST CHECK',
+            [
+                'received_digest' => $digest,
+                'computed_digest' => $computed_digest,
+                'status'          => $_POST['status'] ?? '',
+                'payMethod'       => $_POST['payMethod'] ?? '',
+            ]
+        );
 
         $order = new \WC_Order( $orderid );
 
