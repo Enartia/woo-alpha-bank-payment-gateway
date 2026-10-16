@@ -1,15 +1,17 @@
 === Payment Gateway – nexi Alpha Bank for WooCommerce ===
-Contributors: enartia,georgekapsalakis,g.georgopoulos,akatopodis,mathijs.futselaar@team.blue
+Contributors: enartia,georgekapsalakis,ggeorgopoulos,akatopodis
 Author URI: https://www.papaki.com
 Tags: ecommerce, woocommerce, payment gateway, alphabank, alpha
-Tested up to: 6.8.3
-Requires at least: 4.0
+Tested up to: 7.1
+Requires at least: 6.4
 Stable tag: 2.2.0
-WC tested up to: 10.2.2
+WC tested up to: 11.2.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
-PHP: 7.4+
+Requires PHP: 7.4
 PHP tested up to: 8.4
+
+Accept card and IRIS payments in WooCommerce through the Nexi Alpha Bank paycenter, with pre-authorization, instalments and MasterPass.
 
 == Description ==
 
