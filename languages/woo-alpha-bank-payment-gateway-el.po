@@ -1,7 +1,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Alpha Bank Greece WooCommerce Payment Gateway\n"
-"POT-Creation-Date: 2021-10-27 17:54+0300\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woo-alpha-bank-"
+"payment-gateway\n"
+"POT-Creation-Date: 2026-10-22T07:08:03+00:00\n"
 "PO-Revision-Date: 2021-10-27 17:54+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -12,91 +14,113 @@ msgstr ""
 "X-Generator: Poedit 2.4.3\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: wooshop-alpha.php:41
-msgid ""
-"Alpha bank Payment Gateway allows you to accept payment through various "
-"channels such as Visa, Mastercard, Maestro, American Express, Diners, "
-"Discover cards on your Woocommerce Powered Site."
+#. Plugin Name of the plugin
+#: wooshop-alpha.php
+msgid "Payment Gateway – Nexi Alpha Bank for WooCommerce"
 msgstr ""
-"Το σύστημα πληρωμών της Alpha Bank σας επιτρέπει να λαμβάνετε πληρωμές μέσω "
-"καρτών Visa, Mastercard, Maestro, American Express, Diners, Discover και "
-"Visa στο Woocommerce ηλεκτρονικό κατάστημά σας."
 
-#: wooshop-alpha.php:95
-msgid "Alpha Bank Gateway"
-msgstr "Πύλη πληρωμών της Alpha Bank"
-
-#: wooshop-alpha.php:96
-msgid ""
-"Alpha Bank Gateway allows you to accept payment through various channels "
-"such as Visa, Mastercard, Maestro, American Express, Diners, Discover cards."
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: wooshop-alpha.php
+msgid "https://www.papaki.com"
 msgstr ""
-"Η πύλη πληρωμών μέσω Alpha Bank σας επιτρέπει να λαμβάνεται πληρωμές μέσω "
-"καρτών Visa, Mastercard, Maestro, American Express, Diners, Discover."
 
-#: wooshop-alpha.php:97
+#. Description of the plugin
+#: wooshop-alpha.php
 msgid ""
-"In order to enable <strong>AlphaBank MasterPass</strong> you should go to <a "
-"style=\"color:#000\" href=\"/wp-admin/admin.php?page=wc-settings&tab=checkout"
-"\">Woocommerce Payment methods</a> and enable the «<a style=\"color:#000\" "
-"href=\"/wp-admin/admin.php?page=wc-"
-"settings&tab=checkout&section=alphabank_masterpass\">Alpha Bank Masterpass</"
-"a>» payment method"
+"Payment Gateway – Nexi Alpha Bank for WooCommerce allows you to accept "
+"payment through various channels such as IRIS and Cards like,American "
+"Express, Visa, Mastercard, Maestro, Diners Club On your Woocommerce Powered "
+"Site."
 msgstr ""
-"Για να ενεργοποιήσετε το <strong>AlphaBank MasterPass</strong>θα πρέπει να "
-"πάτε στις <a style=“color:#000” href=“/wp-admin/admin.php?page=wc-"
-"settings&tab=checkout”>Μεθόδους Πληρωμής του Woocommerce</a> και να "
-"ενεργοποιήσετε την μέθοδο πληρωμής «<a style=“color:#000” href=“/wp-admin/"
-"admin.php?page=wc-settings&tab=checkout&section=alphabank_masterpass”>Alpha "
-"Bank Masterpass</a>»"
 
-#: wooshop-alpha.php:114 wooshop-alpha.php:775
+#. Author of the plugin
+#: wooshop-alpha.php
+msgid "Papaki"
+msgstr ""
+
+#. translators: %s: payment gateway name
+#: classes/WC_AlphaBank_Gateway.php:17
+#, php-format
+msgid ""
+"%s allows you to accept payment through various channels such as Visa, "
+"Mastercard, Maestro, American Express, Diners, Discover cards on your "
+"Woocommerce Powered Site."
+msgstr ""
+
+#. translators: %s: payment gateway name
+#: classes/WC_AlphaBank_Gateway.php:58
+#, php-format
+msgid ""
+"%s allows you to accept payment through various channels such as Visa, "
+"Mastercard, Maestro, American Express, Diners, Discover cards."
+msgstr ""
+
+#. translators: 1: MasterPass gateway name, 2: URL of the WooCommerce payment methods settings, 3: URL of the MasterPass settings
+#: classes/WC_AlphaBank_Gateway.php:62
+#, php-format
+msgid ""
+"In order to enable <strong>%1$s</strong> you should go to <a "
+"style=\"color:#000\" href=\"%2$s\">Woocommerce Payment methods</a> and "
+"enable the «<a style=\"color:#000\" href=\"%3$s\">%1$s</a>» payment method"
+msgstr ""
+
+#: classes/WC_AlphaBank_Gateway.php:79
+#: classes/WC_AlphaBank_Gateway_Masterpass.php:78
 msgid "Enable/Disable"
 msgstr "Ενεργοποίηση/Απενεργοποίηση"
 
-#: wooshop-alpha.php:116
-msgid "Enable Alpha Bank Gateway"
-msgstr "Ενεργοποίηση πύλης πληρωμής Alpha Bank"
+#. translators: %s: payment gateway name
+#: classes/WC_AlphaBank_Gateway.php:82
+#, php-format
+msgid "Enable %s"
+msgstr ""
 
-#: wooshop-alpha.php:117 wooshop-alpha.php:778
+#: classes/WC_AlphaBank_Gateway.php:83
+#: classes/WC_AlphaBank_Gateway_Masterpass.php:81
 msgid "Enable or disable the gateway."
 msgstr "Ενεργοποίηση ή απενεργοποίηση της πύλης πληρωμής."
 
-#: wooshop-alpha.php:122
+#: classes/WC_AlphaBank_Gateway.php:88
 msgid "Test Environment"
 msgstr "Test Περιβάλλον"
 
-#: wooshop-alpha.php:124
-msgid "Enable Alpha Bank Test Environment"
-msgstr "Ενεργοποίηση Test Περιβάλλοντος της Alpha Bank"
+#. translators: %s: payment gateway name
+#: classes/WC_AlphaBank_Gateway.php:91
+#, php-format
+msgid "Enable %s test environment"
+msgstr ""
 
-#: wooshop-alpha.php:128 wooshop-alpha.php:783
+#: classes/WC_AlphaBank_Gateway.php:95
+#: classes/WC_AlphaBank_Gateway_Masterpass.php:86
 msgid "Title"
 msgstr "Τίτλος"
 
-#: wooshop-alpha.php:130 wooshop-alpha.php:785
+#: classes/WC_AlphaBank_Gateway.php:97
+#: classes/WC_AlphaBank_Gateway_Masterpass.php:88
 msgid "This controls the title which the user sees during checkout."
 msgstr "Ελέγχει το τίτλο που εμφανίζεται στο ταμείο."
 
-#: wooshop-alpha.php:132
+#: classes/WC_AlphaBank_Gateway.php:99
 msgid "Credit card via Alpha Bank"
 msgstr "Με κάρτα μέσω Alpha Bank"
 
-#: wooshop-alpha.php:135 wooshop-alpha.php:790
+#: classes/WC_AlphaBank_Gateway.php:102
+#: classes/WC_AlphaBank_Gateway_Masterpass.php:93
 msgid "Description"
 msgstr "Περιγραφή"
 
-#: wooshop-alpha.php:137 wooshop-alpha.php:792
+#: classes/WC_AlphaBank_Gateway.php:104
+#: classes/WC_AlphaBank_Gateway_Masterpass.php:95
 msgid "This controls the description which the user sees during checkout."
 msgstr "Ελέγχει τη περιγραφή που βλέπει ο χρήστης στο ταμείο."
 
-#: wooshop-alpha.php:138
+#: classes/WC_AlphaBank_Gateway.php:105
 msgid ""
 "Pay Via Alpha Bank: Accepts Visa, Mastercard, Maestro, American Express, "
 "Diners, Discover"
@@ -104,37 +128,37 @@ msgstr ""
 "Πληρωμή μέσω Alpha Bank: Δέχεται Visa, Mastercard, Maestro, American "
 "Express, Diners, Discover"
 
-#: wooshop-alpha.php:141
+#: classes/WC_AlphaBank_Gateway.php:108
 msgid "Display the logo of Alpha Bank"
 msgstr "Εμφάνιση του λογότυπου της Alpha Bank"
 
-#: wooshop-alpha.php:143
+#: classes/WC_AlphaBank_Gateway.php:110
 msgid "Enable to display the logo of Alpha Bank during checkout"
 msgstr ""
 "Επιλέξτε για να εμφανίζεται το λογότυπο της τράπεζας δίπλα από το κείμενο "
 "πληρωμής με κάρτα, κατά την πληρωμή"
 
-#: wooshop-alpha.php:147
+#: classes/WC_AlphaBank_Gateway.php:114
 msgid "Alpha Bank Merchant ID"
 msgstr "Alpha Bank Merchant ID"
 
-#: wooshop-alpha.php:149
+#: classes/WC_AlphaBank_Gateway.php:116
 msgid "Enter Your Alpha Bank Merchant ID"
 msgstr "Εισάγετε το Merchant ID από την Alpha Bank"
 
-#: wooshop-alpha.php:154
+#: classes/WC_AlphaBank_Gateway.php:121
 msgid "Alpha Bank Shared Secret key"
 msgstr "Alpha Bank Shared Secret key"
 
-#: wooshop-alpha.php:156
+#: classes/WC_AlphaBank_Gateway.php:123
 msgid "Enter your Shared Secret key"
 msgstr "Εισάγετε το Shared Secret key"
 
-#: wooshop-alpha.php:161
+#: classes/WC_AlphaBank_Gateway.php:128
 msgid "Maximum number of installments regardless of the total order amount"
 msgstr "Μέγιστες άτοκες δόσεις ανεξαρτήτως ποσού παραγγελίας"
 
-#: wooshop-alpha.php:164
+#: classes/WC_AlphaBank_Gateway.php:131
 msgid ""
 "1 to 24 Installments,1 for one time payment. You must contact Alpha Bank "
 "first<br /> If you have filled the \"Max Number of installments depending on "
@@ -145,11 +169,11 @@ msgstr ""
 "το πεδίο “Μέγιστες άτοκες δόσεις ανάλογα με το ποσό παραγγελίας”, η τιμή "
 "αυτού του πεδίου θα αγνοηθεί."
 
-#: wooshop-alpha.php:167
+#: classes/WC_AlphaBank_Gateway.php:134
 msgid "Maximum number of installments depending on the total order amount"
 msgstr "Μέγιστες άτοκες δόσεις ανάλογα με το ποσό παραγγελίας"
 
-#: wooshop-alpha.php:169
+#: classes/WC_AlphaBank_Gateway.php:136
 msgid ""
 "Example 80:2, 160:4, 300:8</br> total order greater or equal to 80 -> allow "
 "2 installments, total order greater or equal to 160 -> allow 4 installments, "
@@ -164,19 +188,19 @@ msgstr ""
 "Αφήστε κενό το πεδίο εαν δεν θέλετε να περιορίσετε τον αριθμό των δόσεων "
 "ανάλογα με το ποσό της παραγγελίας."
 
-#: wooshop-alpha.php:172
+#: classes/WC_AlphaBank_Gateway.php:139
 msgid "Pre-Authorize"
 msgstr "Προ-Έγκριση"
 
-#: wooshop-alpha.php:174
+#: classes/WC_AlphaBank_Gateway.php:141
 msgid "Enable to capture preauthorized payments"
 msgstr "Ενεργοποιήστε για να συλλέγεται προεγκεκριμένες πληρωμές"
 
-#: wooshop-alpha.php:178
+#: classes/WC_AlphaBank_Gateway.php:145
 msgid "Return page URL <br />(Successful or Failed Transactions)"
 msgstr "Σελίδα Επιστροφής <br />(Επιτυχείς ή Αποτυχημένες Συναλλαγές)"
 
-#: wooshop-alpha.php:181
+#: classes/WC_AlphaBank_Gateway.php:148
 msgid ""
 "We recommend you to select the default “Thank You Page”, in order to "
 "automatically serve both successful and failed transactions, with the latter "
@@ -191,16 +215,16 @@ msgstr ""
 "πρέπει εσείς να προσθέσετε χειροκίνητα κώδικα στη σελίδα για να λειτουργεί "
 "σωστά."
 
-#: wooshop-alpha.php:185
+#: classes/WC_AlphaBank_Gateway.php:152
 msgid "Enable Debug mode"
 msgstr "Ενεργοποίηση λειτουργίας εντοπισμού σφαλμάτων"
 
-#: wooshop-alpha.php:187
+#: classes/WC_AlphaBank_Gateway.php:154
 msgid "Enabling this will log certain information"
 msgstr ""
 "Η ενεργοποίηση αυτής της δυνατότητας θα καταγράψει ορισμένες πληροφορίες"
 
-#: wooshop-alpha.php:189
+#: classes/WC_AlphaBank_Gateway.php:156
 msgid ""
 "Enabling this (and the debug mode from your wp-config file) will log "
 "information, e.g. bank responses, which will help in debugging issues."
@@ -210,17 +234,17 @@ msgstr ""
 "τραπεζικές απαντήσεις, οι οποίες θα βοηθήσουν σε ζητήματα εντοπισμού "
 "σφαλμάτων."
 
-#: wooshop-alpha.php:192
+#: classes/WC_AlphaBank_Gateway.php:159
 msgid "Enable 2nd “payment received” email"
 msgstr "Ενεργοποίηση αποστολής του 2ου email “Η πληρωμή έχει ληφθεί”"
 
-#: wooshop-alpha.php:194
+#: classes/WC_AlphaBank_Gateway.php:161
 msgid "Enable sending Customer order note with transaction details"
 msgstr ""
 "Ενεργοποίηση αποστολής Σημείωσης παραγγελίας με τις πληροφορίες της "
 "συναλλαγής"
 
-#: wooshop-alpha.php:196
+#: classes/WC_AlphaBank_Gateway.php:163
 msgid ""
 "Enabling this will send an email with the support reference id and "
 "transaction id to the customer, after the transaction has been completed "
@@ -230,35 +254,7 @@ msgstr ""
 "reference Id και το id συναλλαγής στον πελάτη, μετά την ολοκλήρωση της "
 "συναλλαγής (είτε επιτυχημένη είτε αποτυχήμενη)"
 
-#: wooshop-alpha.php:220 wooshop-alpha.php:821
-msgid "Thank you page"
-msgstr "Σελίδα : Ευχαριστούμε για την αγορά"
-
-#: wooshop-alpha.php:291 wooshop-alpha.php:874
-msgid "Choose Installments"
-msgstr "Επιλογή Δόσεων"
-
-#: wooshop-alpha.php:295 wooshop-alpha.php:878
-msgid "Without installments"
-msgstr "Χωρίς δόσεις"
-
-#: wooshop-alpha.php:356
-msgid ""
-"Thank you for your order. We are now redirecting you to Alpha Bank to make "
-"payment."
-msgstr ""
-"Ευχαριστούμε για τη παραγγελία. Σας ανακατευθύνουμε στην Alpha Bank για να "
-"πραγματοποιηθεί πληρωμή."
-
-#: wooshop-alpha.php:491 wooshop-alpha.php:1066
-msgid "Pay via Alpha Bank"
-msgstr "Πληρωμή μέσω Alpha Bank"
-
-#: wooshop-alpha.php:491 wooshop-alpha.php:1066
-msgid "Cancel order &amp; restore cart"
-msgstr "Ακύρωση παραγγελίας &amp; επαναφορά καλαθιού"
-
-#: wooshop-alpha.php:537
+#: classes/WC_AlphaBank_Gateway.php:173
 msgid ""
 "Thank you for your order. We are now redirecting you to Alpha Bank Paycenter "
 "to make payment."
@@ -266,19 +262,54 @@ msgstr ""
 "Ευχαριστούμε για τη παραγγελία. Σας ανακατευθύνουμε στην Alpha Bank για να "
 "πραγματοποιηθεί πληρωμή."
 
-#: wooshop-alpha.php:598 wooshop-alpha.php:1165
+#: classes/WC_AlphaBank_Gateway_Base.php:105
+msgid "Thank you page"
+msgstr "Σελίδα : Ευχαριστούμε για την αγορά"
+
+#: classes/WC_AlphaBank_Gateway_Base.php:153
+msgid "Choose Installments"
+msgstr "Επιλογή Δόσεων"
+
+#: classes/WC_AlphaBank_Gateway_Base.php:157
+msgid "Without installments"
+msgstr "Χωρίς δόσεις"
+
+#: classes/WC_AlphaBank_Gateway_Base.php:197
 msgid ""
-"A technical problem occured. <br />The transaction wasn't successful, "
+"Thank you for your order. We are now redirecting you to Alpha Bank to make "
+"payment."
+msgstr ""
+"Ευχαριστούμε για τη παραγγελία. Σας ανακατευθύνουμε στην Alpha Bank για να "
+"πραγματοποιηθεί πληρωμή."
+
+#: classes/WC_AlphaBank_Gateway_Base.php:266
+msgid "Pay via Alpha Bank"
+msgstr "Πληρωμή μέσω Alpha Bank"
+
+#: classes/WC_AlphaBank_Gateway_Base.php:266
+msgid "Cancel order &amp; restore cart"
+msgstr "Ακύρωση παραγγελίας &amp; επαναφορά καλαθιού"
+
+#: classes/WC_AlphaBank_Gateway_Base.php:318
+msgid ""
+"A technical problem occurred. <br />The transaction wasn't successful, "
 "payment wasn't received."
 msgstr ""
-"Ένα τεχνικό πρόβλημα συνέβη. <br /> Η συναλλαγή δεν ήταν επιτυχής, δε λάβαμε "
-"πληρωμή."
 
-#: wooshop-alpha.php:619 wooshop-alpha.php:1184
+#. translators: 1: amount reported by the bank, 2: currency, 3: merchant ID, 4: bank transaction ID
+#: classes/WC_AlphaBank_Gateway_Base.php:340
+#, php-format
+msgid ""
+"Alpha Bank reported a payment that does not match this order (amount %1$s "
+"%2$s, merchant ID %3$s, transaction ID %4$s). Check it in the Alpha Bank "
+"back office before fulfilling the order."
+msgstr ""
+
+#: classes/WC_AlphaBank_Gateway_Base.php:355
 msgid "Payment Via Alpha Bank<br />Transaction ID: "
 msgstr "Πληρωμή μέσω Alpha Bank <br /> ID Συναλλαγής: "
 
-#: wooshop-alpha.php:620 wooshop-alpha.php:1185
+#: classes/WC_AlphaBank_Gateway_Base.php:356
 msgid ""
 "Thank you for shopping with us.<br />Your transaction was successful, "
 "payment was received.<br />Your order is currently being processed."
@@ -286,7 +317,7 @@ msgstr ""
 "Σας ευχαριστούμε για την προτίμησή σας!<br /> Η συναλλαγή σας ήταν επιτυχής, "
 "λάβαμε τη πληρωμή..<br /> Η παραγγελία σας βρίσκεται υπό επεξεργασία."
 
-#: wooshop-alpha.php:624
+#: classes/WC_AlphaBank_Gateway_Base.php:359
 msgid ""
 "Payment Received.<br />Your order is currently being processed.<br />We will "
 "be shipping your order to you soon.<br />Alpha Bank Bank ID: "
@@ -295,7 +326,7 @@ msgstr ""
 ">Θα σας αποστείλουμε την παραγγελία σας το συντομότερο.<br />ID Συναλλαγής "
 "Alpha Bank: "
 
-#: wooshop-alpha.php:628 wooshop-alpha.php:1193
+#: classes/WC_AlphaBank_Gateway_Base.php:362
 msgid ""
 "Thank you for shopping with us.<br />Your transaction was successful, "
 "payment was received.<br />Your order is now complete."
@@ -303,7 +334,7 @@ msgstr ""
 "Ευχαριστούμε που μας επιλέξατε.<br />Η συναλλαγή σας ήταν επιτυχής, η "
 "πληρωμή έχει ληφθεί.<br />Η παραγγελία σας έχει ολοκληρωθεί."
 
-#: wooshop-alpha.php:631 wooshop-alpha.php:1196
+#: classes/WC_AlphaBank_Gateway_Base.php:364
 msgid ""
 "Payment Received.<br />Your order is now complete.<br />Alpha Bank "
 "Transaction ID: "
@@ -311,7 +342,7 @@ msgstr ""
 "Λάβαμε την πληρωμή.<br />Η παραγγελία σας έχει ολοκληρωθεί.<br />ID "
 "Συναλλαγής Alpha Bank: "
 
-#: wooshop-alpha.php:649 wooshop-alpha.php:1214
+#: classes/WC_AlphaBank_Gateway_Base.php:371
 msgid ""
 "Thank you for shopping with us. <br />However, the transaction wasn't "
 "successful, payment was cancelled."
@@ -319,8 +350,9 @@ msgstr ""
 "Σας ευχαριστούμε για την προτίμησή σας!<br /> Η συναλλαγή δεν ήταν επιτυχής, "
 "η πληρωμή ακυρώθηκε."
 
-#: wooshop-alpha.php:658 wooshop-alpha.php:665 wooshop-alpha.php:672
-#: wooshop-alpha.php:1222 wooshop-alpha.php:1229 wooshop-alpha.php:1236
+#: classes/WC_AlphaBank_Gateway_Base.php:373
+#: classes/WC_AlphaBank_Gateway_Base.php:375
+#: classes/WC_AlphaBank_Gateway_Base.php:377
 msgid ""
 "Thank you for shopping with us. <br />However, the transaction wasn't "
 "successful, payment wasn't received."
@@ -328,45 +360,61 @@ msgstr ""
 "Σας ευχαριστούμε για την προτίμησή σας!<br /> Η συναλλαγή δεν ήταν επιτυχής, "
 "η πληρωμή δεν ολοκληρώθηκε."
 
-#: wooshop-alpha.php:709
-msgid ""
-"Alpha bank Payment Masterpass allows you to accept payment through "
-"MasterPass."
+#: classes/WC_AlphaBank_Gateway_Base.php:484
+msgid "E-mail address"
 msgstr ""
-"Το σύστημα πληρωμών της Alpha Bank MasterPass σας επιτρέπει να λαμβάνετε "
-"πληρωμές μέσω MasterPass."
 
-#: wooshop-alpha.php:760
+#: classes/WC_AlphaBank_Gateway_Base.php:485
+msgid "Billing town/city"
+msgstr ""
+
+#: classes/WC_AlphaBank_Gateway_Base.php:486
+msgid "Billing country / region"
+msgstr ""
+
+#: classes/WC_AlphaBank_Gateway_Base.php:487
+msgid "Billing street address"
+msgstr ""
+
+#: classes/WC_AlphaBank_Gateway_Base.php:488
+msgid "Billing postcode / ZIP"
+msgstr ""
+
+#. translators: %s: name of the required checkout field
+#: classes/WC_AlphaBank_Gateway_Base.php:501
+#, php-format
+msgid "%s is a mandatory field!"
+msgstr ""
+
+#. translators: %s: payment gateway name
+#: classes/WC_AlphaBank_Gateway_Masterpass.php:18
+#, php-format
+msgid "%s allows you to accept payment through MasterPass."
+msgstr ""
+
+#: classes/WC_AlphaBank_Gateway_Masterpass.php:65
 msgid "Alpha Bank MasterPass"
 msgstr "Alpha Bank MasterPass"
 
-#: wooshop-alpha.php:761
+#: classes/WC_AlphaBank_Gateway_Masterpass.php:66
 msgid "Alpha Bank MasterPass allows you to pay with your MasterPass."
 msgstr ""
 "Το σύστημα πληρωμών της Alpha Bank MasterPass σας επιτρέπει να λαμβάνετε "
 "πληρωμές μέσω MasterPass."
 
-#: wooshop-alpha.php:777
+#: classes/WC_AlphaBank_Gateway_Masterpass.php:80
 msgid "Enable Alpha Bank MasterPass"
 msgstr "Ενεργοποίηση Alpha Bank MasterPass"
 
-#: wooshop-alpha.php:787
+#: classes/WC_AlphaBank_Gateway_Masterpass.php:90
 msgid "Pay via MasterPass"
 msgstr "Πληρωμή μέσω MasterPass"
 
-#: wooshop-alpha.php:793
+#: classes/WC_AlphaBank_Gateway_Masterpass.php:96
 msgid "Pay Via Alpha Bank MasterPass"
 msgstr "Πληρωμή μέσω Alpha Bank MasterPass"
 
-#: wooshop-alpha.php:934
-msgid ""
-"Thank you for your order. We are now redirecting you to Alpha Bank "
-"MasterPass to make payment."
-msgstr ""
-"Ευχαριστούμε για τη παραγγελία. Σας ανακατευθύνουμε στo σύστημα πληρωμών "
-"MasterPass της Alpha Bank για να πραγματοποιηθεί πληρωμή."
-
-#: wooshop-alpha.php:1110
+#: classes/WC_AlphaBank_Gateway_Masterpass.php:106
 msgid ""
 "Thank you for your order. We are now redirecting you to Alpha Bank "
 "MasterPass Paycenter to make payment."
@@ -374,14 +422,81 @@ msgstr ""
 "Ευχαριστούμε για τη παραγγελία. Σας ανακατευθύνουμε στo σύστημα πληρωμών "
 "MasterPass της Alpha Bank για να πραγματοποιηθεί πληρωμή."
 
-#: wooshop-alpha.php:1189
+#: wooshop-alpha.php:37
 msgid ""
-"Payment Received.<br />Your order is currently being processed.<br />We will "
-"be shipping your order to you soon.<br />Alpha Bank ID: "
+"Alpha Bank Payment Gateway requires WooCommerce to be installed and active."
 msgstr ""
-"Η πληρωμή έχει ληφθεί. <br />Η παραγγελία σας βρίσκεται υπό επεξεργασία.<br /"
-">Θα σας αποστείλουμε την παραγγελία σας το συντομότερο.<br />ID Συναλλαγής "
-"Alpha Bank: "
+
+#~ msgid ""
+#~ "Alpha bank Payment Gateway allows you to accept payment through various "
+#~ "channels such as Visa, Mastercard, Maestro, American Express, Diners, "
+#~ "Discover cards on your Woocommerce Powered Site."
+#~ msgstr ""
+#~ "Το σύστημα πληρωμών της Alpha Bank σας επιτρέπει να λαμβάνετε πληρωμές "
+#~ "μέσω καρτών Visa, Mastercard, Maestro, American Express, Diners, Discover "
+#~ "και Visa στο Woocommerce ηλεκτρονικό κατάστημά σας."
+
+#~ msgid "Alpha Bank Gateway"
+#~ msgstr "Πύλη πληρωμών της Alpha Bank"
+
+#~ msgid ""
+#~ "Alpha Bank Gateway allows you to accept payment through various channels "
+#~ "such as Visa, Mastercard, Maestro, American Express, Diners, Discover "
+#~ "cards."
+#~ msgstr ""
+#~ "Η πύλη πληρωμών μέσω Alpha Bank σας επιτρέπει να λαμβάνεται πληρωμές μέσω "
+#~ "καρτών Visa, Mastercard, Maestro, American Express, Diners, Discover."
+
+#~ msgid ""
+#~ "In order to enable <strong>AlphaBank MasterPass</strong> you should go to "
+#~ "<a style=\"color:#000\" href=\"/wp-admin/admin.php?page=wc-"
+#~ "settings&tab=checkout\">Woocommerce Payment methods</a> and enable the "
+#~ "«<a style=\"color:#000\" href=\"/wp-admin/admin.php?page=wc-"
+#~ "settings&tab=checkout&section=alphabank_masterpass\">Alpha Bank "
+#~ "Masterpass</a>» payment method"
+#~ msgstr ""
+#~ "Για να ενεργοποιήσετε το <strong>AlphaBank MasterPass</strong>θα πρέπει "
+#~ "να πάτε στις <a style=“color:#000” href=“/wp-admin/admin.php?page=wc-"
+#~ "settings&tab=checkout”>Μεθόδους Πληρωμής του Woocommerce</a> και να "
+#~ "ενεργοποιήσετε την μέθοδο πληρωμής «<a style=“color:#000” href=“/wp-admin/"
+#~ "admin.php?page=wc-"
+#~ "settings&tab=checkout&section=alphabank_masterpass”>Alpha Bank "
+#~ "Masterpass</a>»"
+
+#~ msgid "Enable Alpha Bank Gateway"
+#~ msgstr "Ενεργοποίηση πύλης πληρωμής Alpha Bank"
+
+#~ msgid "Enable Alpha Bank Test Environment"
+#~ msgstr "Ενεργοποίηση Test Περιβάλλοντος της Alpha Bank"
+
+#~ msgid ""
+#~ "A technical problem occured. <br />The transaction wasn't successful, "
+#~ "payment wasn't received."
+#~ msgstr ""
+#~ "Ένα τεχνικό πρόβλημα συνέβη. <br /> Η συναλλαγή δεν ήταν επιτυχής, δε "
+#~ "λάβαμε πληρωμή."
+
+#~ msgid ""
+#~ "Alpha bank Payment Masterpass allows you to accept payment through "
+#~ "MasterPass."
+#~ msgstr ""
+#~ "Το σύστημα πληρωμών της Alpha Bank MasterPass σας επιτρέπει να λαμβάνετε "
+#~ "πληρωμές μέσω MasterPass."
+
+#~ msgid ""
+#~ "Thank you for your order. We are now redirecting you to Alpha Bank "
+#~ "MasterPass to make payment."
+#~ msgstr ""
+#~ "Ευχαριστούμε για τη παραγγελία. Σας ανακατευθύνουμε στo σύστημα πληρωμών "
+#~ "MasterPass της Alpha Bank για να πραγματοποιηθεί πληρωμή."
+
+#~ msgid ""
+#~ "Payment Received.<br />Your order is currently being processed.<br />We "
+#~ "will be shipping your order to you soon.<br />Alpha Bank ID: "
+#~ msgstr ""
+#~ "Η πληρωμή έχει ληφθεί. <br />Η παραγγελία σας βρίσκεται υπό επεξεργασία."
+#~ "<br />Θα σας αποστείλουμε την παραγγελία σας το συντομότερο.<br />ID "
+#~ "Συναλλαγής Alpha Bank: "
 
 #~ msgid "No Installments"
 #~ msgstr "Χωρίς Δόσεις"

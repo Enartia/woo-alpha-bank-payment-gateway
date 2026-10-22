@@ -14,7 +14,8 @@ class WC_AlphaBank_Gateway_Masterpass extends WC_AlphaBank_Gateway_Base {
         $this->id                 = 'alphabank_masterpass';
         $this->has_fields         = true;
         $this->notify_url         = WC()->api_request_url( 'WC_AlphaBank_Gateway_Masterpass' );
-        $this->method_description = __( static::PLUGIN_TITLE . ' allows you to accept payment through MasterPass.', static::TEXT_DOMAIN );
+        /* translators: %s: payment gateway name */
+        $this->method_description = sprintf( __( '%s allows you to accept payment through MasterPass.', 'woo-alpha-bank-payment-gateway' ), static::PLUGIN_TITLE );
         $this->method_title       = static::PLUGIN_TITLE;
 
         $this->init_form_fields();
@@ -25,7 +26,9 @@ class WC_AlphaBank_Gateway_Masterpass extends WC_AlphaBank_Gateway_Base {
 
         $alpha_settings = get_option( 'woocommerce_alphabank_gateway_settings', [] );
         $this->ab_merchantId             = $alpha_settings['ab_merchantId'] ?? '';
-        $this->ab_sharedSecretKey        = $alpha_settings['ab_sharedSecretKey'] ?? '';
+        // The card gateway stores the secret encrypted; decrypt it the same way its get_option() does,
+        // or MasterPass signs the bank request with the ciphertext and the bank rejects the digest.
+        $this->ab_sharedSecretKey        = sanitize_text_field( $this->decrypt_stored_secret( $alpha_settings['ab_sharedSecretKey'] ?? '' ) );
         $this->ab_environment            = $alpha_settings['ab_environment'] ?? 'yes';
         $this->ab_installments           = (int) ( $alpha_settings['ab_installments'] ?? 1 );
         $this->ab_installments_variation = $alpha_settings['ab_installments_variation'] ?? '';
@@ -38,15 +41,14 @@ class WC_AlphaBank_Gateway_Masterpass extends WC_AlphaBank_Gateway_Base {
 
         add_action( 'woocommerce_receipt_alphabank_masterpass', array( $this, 'receipt_page' ) );
         add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'process_admin_options' ) );
-        add_action( 'woocommerce_api_wc_alphabank_gateway', array( $this, 'check_alphabank_response' ) );
     }
 
     /**
      * @return void
      */
     public function admin_options() {
-        echo '<h3>' . __( 'Alpha Bank MasterPass', static::TEXT_DOMAIN ) . '</h3>';
-        echo '<p>' . __( 'Alpha Bank MasterPass allows you to pay with your MasterPass.', static::TEXT_DOMAIN ) . '</p>';
+        echo '<h3>' . esc_html__( 'Alpha Bank MasterPass', 'woo-alpha-bank-payment-gateway' ) . '</h3>';
+        echo '<p>' . esc_html__( 'Alpha Bank MasterPass allows you to pay with your MasterPass.', 'woo-alpha-bank-payment-gateway' ) . '</p>';
         echo '<table class="form-table">';
         $this->generate_settings_html();
         echo '</table>';
@@ -58,25 +60,25 @@ class WC_AlphaBank_Gateway_Masterpass extends WC_AlphaBank_Gateway_Base {
     public function init_form_fields() {
         $this->form_fields = array(
             'masterpass_enabled'     => array(
-                'title'       => __( 'Enable/Disable', static::TEXT_DOMAIN ),
+                'title'       => __( 'Enable/Disable', 'woo-alpha-bank-payment-gateway' ),
                 'type'        => 'checkbox',
-                'label'       => __( 'Enable Alpha Bank MasterPass', static::TEXT_DOMAIN ),
-                'description' => __( 'Enable or disable the gateway.', static::TEXT_DOMAIN ),
+                'label'       => __( 'Enable Alpha Bank MasterPass', 'woo-alpha-bank-payment-gateway' ),
+                'description' => __( 'Enable or disable the gateway.', 'woo-alpha-bank-payment-gateway' ),
                 'desc_tip'    => true,
                 'default'     => 'yes',
             ),
             'masterpass_title'       => array(
-                'title'       => __( 'Title', static::TEXT_DOMAIN ),
+                'title'       => __( 'Title', 'woo-alpha-bank-payment-gateway' ),
                 'type'        => 'text',
-                'description' => __( 'This controls the title which the user sees during checkout.', static::TEXT_DOMAIN ),
+                'description' => __( 'This controls the title which the user sees during checkout.', 'woo-alpha-bank-payment-gateway' ),
                 'desc_tip'    => false,
-                'default'     => __( 'Pay via MasterPass', static::TEXT_DOMAIN ),
+                'default'     => __( 'Pay via MasterPass', 'woo-alpha-bank-payment-gateway' ),
             ),
             'masterpass_description' => array(
-                'title'       => __( 'Description', static::TEXT_DOMAIN ),
+                'title'       => __( 'Description', 'woo-alpha-bank-payment-gateway' ),
                 'type'        => 'textarea',
-                'description' => __( 'This controls the description which the user sees during checkout.', static::TEXT_DOMAIN ),
-                'default'     => __( 'Pay Via Alpha Bank MasterPass', static::TEXT_DOMAIN ),
+                'description' => __( 'This controls the description which the user sees during checkout.', 'woo-alpha-bank-payment-gateway' ),
+                'default'     => __( 'Pay Via Alpha Bank MasterPass', 'woo-alpha-bank-payment-gateway' ),
             ),
         );
     }
@@ -86,7 +88,7 @@ class WC_AlphaBank_Gateway_Masterpass extends WC_AlphaBank_Gateway_Base {
      * @return void
      */
     public function receipt_page( $order ) {
-        echo '<p>' . __( 'Thank you for your order. We are now redirecting you to Alpha Bank MasterPass Paycenter to make payment.', static::TEXT_DOMAIN ) . '</p>';
-        echo $this->generate_form( $order, 'ab_payment_masterpass_form', 'submit_alphabank_payment_masterpass_form' );
+        echo '<p>' . esc_html__( 'Thank you for your order. We are now redirecting you to Alpha Bank MasterPass Paycenter to make payment.', 'woo-alpha-bank-payment-gateway' ) . '</p>';
+        echo wp_kses( $this->generate_form( $order, 'ab_payment_masterpass_form', 'submit_alphabank_payment_masterpass_form' ), static::FORM_ALLOWED_HTML );
     }
 }
