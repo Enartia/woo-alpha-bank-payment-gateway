@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Application {
     public const PLUGIN_TITLE = 'Payment Gateway – nexi Alpha Bank for WooCommerce';
     public const TEXT_DOMAIN  = 'woo-alpha-bank-payment-gateway';
+    public const VERSION      = '2.2.1';
 
     private $entrypoint_path;
 
@@ -16,6 +17,7 @@ class Application {
 
         // add_action( 'plugins_loaded', [ $this, 'init' ], 0 );
         // we're in a plugins_loaded hook already, @see wooshop-alpha.php
+        Installer::maybe_install();
         $this->init();
 
         add_action( 'init', [ $this, 'load_languages' ] );
@@ -32,7 +34,7 @@ class Application {
     }
 
     public function load_languages() {
-        load_plugin_textdomain( static::TEXT_DOMAIN, false, dirname( plugin_basename( __FILE__ ) ) . '/../languages/' );
+        load_plugin_textdomain( static::TEXT_DOMAIN, false, dirname( plugin_basename( __FILE__ ) ) . '/../languages/' ); // phpcs:ignore PluginCheck.CodeAnalysis.DiscouragedFunctions.load_plugin_textdomainFound -- Loads the bundled Greek translation, which is newer than the translate.wordpress.org pack (2022-03-03).
     }
 
     public function declare_transactions() {

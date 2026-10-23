@@ -31,7 +31,7 @@ if ( class_exists( '\Automattic\WooCommerce\Blocks\Payments\Integrations\Abstrac
                     'wp-html-entities',
                     'wp-i18n',
                 ],
-                null,
+                Application::VERSION,
                 true
             );
 

@@ -13,7 +13,8 @@ class WC_AlphaBank_Gateway extends WC_AlphaBank_Gateway_Base {
 
         $this->id                 = 'alphabank_gateway';
         $this->notify_url         = WC()->api_request_url( 'WC_AlphaBank_Gateway' );
-        $this->method_description = __( static::PLUGIN_TITLE . ' allows you to accept payment through various channels such as Visa, Mastercard, Maestro, American Express, Diners, Discover cards on your Woocommerce Powered Site.', static::TEXT_DOMAIN );
+        /* translators: %s: payment gateway name */
+        $this->method_description = sprintf( __( '%s allows you to accept payment through various channels such as Visa, Mastercard, Maestro, American Express, Diners, Discover cards on your Woocommerce Powered Site.', 'woo-alpha-bank-payment-gateway' ), static::PLUGIN_TITLE );
         $this->redirect_page_id   = (string) intval( $this->get_option( 'redirect_page_id' ) );
         $this->method_title       = static::PLUGIN_TITLE;
 
@@ -52,9 +53,18 @@ class WC_AlphaBank_Gateway extends WC_AlphaBank_Gateway_Base {
      * @return void
      */
     public function admin_options() {
-        echo '<h3>' . __( static::PLUGIN_TITLE, static::TEXT_DOMAIN ) . '</h3>';
-        echo '<p>' . __( static::PLUGIN_TITLE . ' allows you to accept payment through various channels such as Visa, Mastercard, Maestro, American Express, Diners, Discover cards.', static::TEXT_DOMAIN ) . '</p>';
-        echo '<div style="background: #f1e5bc; padding: 0.3rem 1rem; max-width:900px;"> <p>' . __( 'In order to enable <strong> ' . WC_AlphaBank_Gateway_Masterpass::PLUGIN_TITLE . '</strong> you should go to <a style="color:#000" href="/wp-admin/admin.php?page=wc-settings&tab=checkout">Woocommerce Payment methods</a> and enable the «<a style="color:#000" href="/wp-admin/admin.php?page=wc-settings&tab=checkout&section=alphabank_masterpass">' . WC_AlphaBank_Gateway_Masterpass::PLUGIN_TITLE . '</a>» payment method', static::TEXT_DOMAIN ) . '</p></div>';
+        echo '<h3>' . esc_html( static::PLUGIN_TITLE ) . '</h3>';
+        /* translators: %s: payment gateway name */
+        echo '<p>' . esc_html( sprintf( __( '%s allows you to accept payment through various channels such as Visa, Mastercard, Maestro, American Express, Diners, Discover cards.', 'woo-alpha-bank-payment-gateway' ), static::PLUGIN_TITLE ) ) . '</p>';
+        echo '<div style="background: #f1e5bc; padding: 0.3rem 1rem; max-width:900px;"> <p>' . wp_kses_post(
+            sprintf(
+                /* translators: 1: MasterPass gateway name, 2: URL of the WooCommerce payment methods settings, 3: URL of the MasterPass settings */
+                __( 'In order to enable <strong>%1$s</strong> you should go to <a style="color:#000" href="%2$s">Woocommerce Payment methods</a> and enable the «<a style="color:#000" href="%3$s">%1$s</a>» payment method', 'woo-alpha-bank-payment-gateway' ),
+                esc_html( WC_AlphaBank_Gateway_Masterpass::PLUGIN_TITLE ),
+                esc_url( admin_url( 'admin.php?page=wc-settings&tab=checkout' ) ),
+                esc_url( admin_url( 'admin.php?page=wc-settings&tab=checkout&section=alphabank_masterpass' ) )
+            )
+        ) . '</p></div>';
         echo '<table class="form-table">';
         $this->generate_settings_html();
         echo '</table>';
@@ -66,89 +76,91 @@ class WC_AlphaBank_Gateway extends WC_AlphaBank_Gateway_Base {
     public function init_form_fields() {
         $this->form_fields = array(
             'enabled'                   => array(
-                'title'       => __( 'Enable/Disable', static::TEXT_DOMAIN ),
+                'title'       => __( 'Enable/Disable', 'woo-alpha-bank-payment-gateway' ),
                 'type'        => 'checkbox',
-                'label'       => __( 'Enable ' . static::PLUGIN_TITLE, static::TEXT_DOMAIN ),
-                'description' => __( 'Enable or disable the gateway.', static::TEXT_DOMAIN ),
+                /* translators: %s: payment gateway name */
+                'label'       => sprintf( __( 'Enable %s', 'woo-alpha-bank-payment-gateway' ), static::PLUGIN_TITLE ),
+                'description' => __( 'Enable or disable the gateway.', 'woo-alpha-bank-payment-gateway' ),
                 'desc_tip'    => true,
                 'default'     => 'yes',
             ),
             'ab_environment'            => array(
-                'title'   => __( 'Test Environment', static::TEXT_DOMAIN ),
+                'title'   => __( 'Test Environment', 'woo-alpha-bank-payment-gateway' ),
                 'type'    => 'checkbox',
-                'label'   => __( 'Enable ' . static::PLUGIN_TITLE . ' test environment', static::TEXT_DOMAIN ),
+                /* translators: %s: payment gateway name */
+                'label'   => sprintf( __( 'Enable %s test environment', 'woo-alpha-bank-payment-gateway' ), static::PLUGIN_TITLE ),
                 'default' => 'yes',
             ),
             'title'                     => array(
-                'title'       => __( 'Title', static::TEXT_DOMAIN ),
+                'title'       => __( 'Title', 'woo-alpha-bank-payment-gateway' ),
                 'type'        => 'text',
-                'description' => __( 'This controls the title which the user sees during checkout.', static::TEXT_DOMAIN ),
+                'description' => __( 'This controls the title which the user sees during checkout.', 'woo-alpha-bank-payment-gateway' ),
                 'desc_tip'    => false,
-                'default'     => __( 'Credit card via Alpha Bank', static::TEXT_DOMAIN ),
+                'default'     => __( 'Credit card via Alpha Bank', 'woo-alpha-bank-payment-gateway' ),
             ),
             'description'               => array(
-                'title'       => __( 'Description', static::TEXT_DOMAIN ),
+                'title'       => __( 'Description', 'woo-alpha-bank-payment-gateway' ),
                 'type'        => 'textarea',
-                'description' => __( 'This controls the description which the user sees during checkout.', static::TEXT_DOMAIN ),
-                'default'     => __( 'Pay Via Alpha Bank: Accepts Visa, Mastercard, Maestro, American Express, Diners, Discover', static::TEXT_DOMAIN ),
+                'description' => __( 'This controls the description which the user sees during checkout.', 'woo-alpha-bank-payment-gateway' ),
+                'default'     => __( 'Pay Via Alpha Bank: Accepts Visa, Mastercard, Maestro, American Express, Diners, Discover', 'woo-alpha-bank-payment-gateway' ),
             ),
             'ab_render_logo'            => array(
-                'title'   => __( 'Display the logo of Alpha Bank', static::TEXT_DOMAIN ),
+                'title'   => __( 'Display the logo of Alpha Bank', 'woo-alpha-bank-payment-gateway' ),
                 'type'    => 'checkbox',
-                'label'   => __( 'Enable to display the logo of Alpha Bank during checkout', static::TEXT_DOMAIN ),
+                'label'   => __( 'Enable to display the logo of Alpha Bank during checkout', 'woo-alpha-bank-payment-gateway' ),
                 'default' => 'yes',
             ),
             'ab_merchantId'             => array(
-                'title'       => __( 'Alpha Bank Merchant ID', static::TEXT_DOMAIN ),
+                'title'       => __( 'Alpha Bank Merchant ID', 'woo-alpha-bank-payment-gateway' ),
                 'type'        => 'text',
-                'description' => __( 'Enter Your Alpha Bank Merchant ID', static::TEXT_DOMAIN ),
+                'description' => __( 'Enter Your Alpha Bank Merchant ID', 'woo-alpha-bank-payment-gateway' ),
                 'default'     => '',
                 'desc_tip'    => true,
             ),
             'ab_sharedSecretKey'        => array(
-                'title'       => __( 'Alpha Bank Shared Secret key', static::TEXT_DOMAIN ),
+                'title'       => __( 'Alpha Bank Shared Secret key', 'woo-alpha-bank-payment-gateway' ),
                 'type'        => 'password',
-                'description' => __( 'Enter your Shared Secret key', static::TEXT_DOMAIN ),
+                'description' => __( 'Enter your Shared Secret key', 'woo-alpha-bank-payment-gateway' ),
                 'default'     => '',
                 'desc_tip'    => true,
             ),
             'ab_installments'           => array(
-                'title'       => __( 'Maximum number of installments regardless of the total order amount', static::TEXT_DOMAIN ),
+                'title'       => __( 'Maximum number of installments regardless of the total order amount', 'woo-alpha-bank-payment-gateway' ),
                 'type'        => 'select',
                 'options'     => $this->ab_get_installments(),
-                'description' => __( '1 to 24 Installments,1 for one time payment. You must contact Alpha Bank first<br /> If you have filled the "Max Number of installments depending on the total order amount", the value of this field will be ignored.', static::TEXT_DOMAIN ),
+                'description' => __( '1 to 24 Installments,1 for one time payment. You must contact Alpha Bank first<br /> If you have filled the "Max Number of installments depending on the total order amount", the value of this field will be ignored.', 'woo-alpha-bank-payment-gateway' ),
             ),
             'ab_installments_variation' => array(
-                'title'       => __( 'Maximum number of installments depending on the total order amount', static::TEXT_DOMAIN ),
+                'title'       => __( 'Maximum number of installments depending on the total order amount', 'woo-alpha-bank-payment-gateway' ),
                 'type'        => 'text',
-                'description' => __( 'Example 80:2, 160:4, 300:8</br> total order greater or equal to 80 -> allow 2 installments, total order greater or equal to 160 -> allow 4 installments, total order greater or equal to 300 -> allow 8 installments</br> Leave the field blank if you do not want to limit the number of installments depending on the amount of the order.', static::TEXT_DOMAIN ),
+                'description' => __( 'Example 80:2, 160:4, 300:8</br> total order greater or equal to 80 -> allow 2 installments, total order greater or equal to 160 -> allow 4 installments, total order greater or equal to 300 -> allow 8 installments</br> Leave the field blank if you do not want to limit the number of installments depending on the amount of the order.', 'woo-alpha-bank-payment-gateway' ),
             ),
             'ab_transactionType'        => array(
-                'title'   => __( 'Pre-Authorize', static::TEXT_DOMAIN ),
+                'title'   => __( 'Pre-Authorize', 'woo-alpha-bank-payment-gateway' ),
                 'type'    => 'checkbox',
-                'label'   => __( 'Enable to capture preauthorized payments', static::TEXT_DOMAIN ),
+                'label'   => __( 'Enable to capture preauthorized payments', 'woo-alpha-bank-payment-gateway' ),
                 'default' => 'no',
             ),
             'redirect_page_id'          => array(
-                'title'       => __( 'Return page URL <br />(Successful or Failed Transactions)', static::TEXT_DOMAIN ),
+                'title'       => __( 'Return page URL <br />(Successful or Failed Transactions)', 'woo-alpha-bank-payment-gateway' ),
                 'type'        => 'select',
                 'options'     => $this->ab_get_pages( 'Select Page' ),
-                'description' => __( 'We recommend you to select the default “Thank You Page”, in order to automatically serve both successful and failed transactions, with the latter also offering the option to try the payment again.<br /> If you select a different page, you will have to handle failed payments yourself by adding custom code.', static::TEXT_DOMAIN ),
+                'description' => __( 'We recommend you to select the default “Thank You Page”, in order to automatically serve both successful and failed transactions, with the latter also offering the option to try the payment again.<br /> If you select a different page, you will have to handle failed payments yourself by adding custom code.', 'woo-alpha-bank-payment-gateway' ),
                 'default'     => "-1",
             ),
             'ab_enable_log'             => array(
-                'title'       => __( 'Enable Debug mode', static::TEXT_DOMAIN ),
+                'title'       => __( 'Enable Debug mode', 'woo-alpha-bank-payment-gateway' ),
                 'type'        => 'checkbox',
-                'label'       => __( 'Enabling this will log certain information', static::TEXT_DOMAIN ),
+                'label'       => __( 'Enabling this will log certain information', 'woo-alpha-bank-payment-gateway' ),
                 'default'     => 'no',
-                'description' => __( 'Enabling this (and the debug mode from your wp-config file) will log information, e.g. bank responses, which will help in debugging issues.', static::TEXT_DOMAIN ),
+                'description' => __( 'Enabling this (and the debug mode from your wp-config file) will log information, e.g. bank responses, which will help in debugging issues.', 'woo-alpha-bank-payment-gateway' ),
             ),
             'ab_order_note'             => array(
-                'title'       => __( 'Enable 2nd “payment received” email', static::TEXT_DOMAIN ),
+                'title'       => __( 'Enable 2nd “payment received” email', 'woo-alpha-bank-payment-gateway' ),
                 'type'        => 'checkbox',
-                'label'       => __( 'Enable sending Customer order note with transaction details', static::TEXT_DOMAIN ),
+                'label'       => __( 'Enable sending Customer order note with transaction details', 'woo-alpha-bank-payment-gateway' ),
                 'default'     => 'no',
-                'description' => __( 'Enabling this will send an email with the support reference id and transaction id to the customer, after the transaction has been completed (either on success or failure)', static::TEXT_DOMAIN ),
+                'description' => __( 'Enabling this will send an email with the support reference id and transaction id to the customer, after the transaction has been completed (either on success or failure)', 'woo-alpha-bank-payment-gateway' ),
             ),
         );
     }
@@ -158,7 +170,7 @@ class WC_AlphaBank_Gateway extends WC_AlphaBank_Gateway_Base {
      * @return void
      */
     public function receipt_page( $order ) {
-        echo '<p>' . __( 'Thank you for your order. We are now redirecting you to Alpha Bank Paycenter to make payment.', static::TEXT_DOMAIN ) . '</p>';
-        echo $this->generate_form( $order, 'ab_payment_form', 'submit_alphabank_payment_form' );
+        echo '<p>' . esc_html__( 'Thank you for your order. We are now redirecting you to Alpha Bank Paycenter to make payment.', 'woo-alpha-bank-payment-gateway' ) . '</p>';
+        echo wp_kses( $this->generate_form( $order, 'ab_payment_form', 'submit_alphabank_payment_form' ), static::FORM_ALLOWED_HTML );
     }
 }
