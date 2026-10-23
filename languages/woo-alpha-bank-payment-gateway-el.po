@@ -52,6 +52,9 @@ msgid ""
 "Mastercard, Maestro, American Express, Diners, Discover cards on your "
 "Woocommerce Powered Site."
 msgstr ""
+"Το %s σας επιτρέπει να δέχεστε πληρωμές μέσω διάφορων καναλιών, όπως κάρτες "
+"Visa, Mastercard, Maestro, American Express, Diners και Discover, στο "
+"ηλεκτρονικό σας κατάστημα WooCommerce."
 
 #. translators: %s: payment gateway name
 #: classes/WC_AlphaBank_Gateway.php:58
@@ -60,6 +63,8 @@ msgid ""
 "%s allows you to accept payment through various channels such as Visa, "
 "Mastercard, Maestro, American Express, Diners, Discover cards."
 msgstr ""
+"Το %s σας επιτρέπει να δέχεστε πληρωμές μέσω διάφορων καναλιών, όπως κάρτες "
+"Visa, Mastercard, Maestro, American Express, Diners και Discover."
 
 #. translators: 1: MasterPass gateway name, 2: URL of the WooCommerce payment methods settings, 3: URL of the MasterPass settings
 #: classes/WC_AlphaBank_Gateway.php:62
@@ -69,6 +74,10 @@ msgid ""
 "style=\"color:#000\" href=\"%2$s\">Woocommerce Payment methods</a> and "
 "enable the «<a style=\"color:#000\" href=\"%3$s\">%1$s</a>» payment method"
 msgstr ""
+"Για να ενεργοποιήσετε το <strong>%1$s</strong>, μεταβείτε στις <a "
+"style=\"color:#000\" href=\"%2$s\">Μεθόδους πληρωμής του WooCommerce</a> και "
+"ενεργοποιήστε τη μέθοδο πληρωμής «<a style=\"color:#000\" "
+"href=\"%3$s\">%1$s</a>»"
 
 #: classes/WC_AlphaBank_Gateway.php:79
 #: classes/WC_AlphaBank_Gateway_Masterpass.php:78
@@ -79,7 +88,7 @@ msgstr "Ενεργοποίηση/Απενεργοποίηση"
 #: classes/WC_AlphaBank_Gateway.php:82
 #, php-format
 msgid "Enable %s"
-msgstr ""
+msgstr "Ενεργοποίηση του %s"
 
 #: classes/WC_AlphaBank_Gateway.php:83
 #: classes/WC_AlphaBank_Gateway_Masterpass.php:81
@@ -94,7 +103,7 @@ msgstr "Test Περιβάλλον"
 #: classes/WC_AlphaBank_Gateway.php:91
 #, php-format
 msgid "Enable %s test environment"
-msgstr ""
+msgstr "Ενεργοποίηση του Test Περιβάλλοντος για το %s"
 
 #: classes/WC_AlphaBank_Gateway.php:95
 #: classes/WC_AlphaBank_Gateway_Masterpass.php:86
@@ -295,6 +304,8 @@ msgid ""
 "A technical problem occurred. <br />The transaction wasn't successful, "
 "payment wasn't received."
 msgstr ""
+"Παρουσιάστηκε τεχνικό πρόβλημα. <br />Η συναλλαγή δεν ήταν επιτυχής, η "
+"πληρωμή δεν ελήφθη."
 
 #. translators: 1: amount reported by the bank, 2: currency, 3: merchant ID, 4: bank transaction ID
 #: classes/WC_AlphaBank_Gateway_Base.php:340
@@ -304,6 +315,9 @@ msgid ""
 "%2$s, merchant ID %3$s, transaction ID %4$s). Check it in the Alpha Bank "
 "back office before fulfilling the order."
 msgstr ""
+"Η Alpha Bank ανέφερε πληρωμή που δεν αντιστοιχεί σε αυτή την παραγγελία "
+"(ποσό %1$s %2$s, Merchant ID %3$s, ID συναλλαγής %4$s). Ελέγξτε την πληρωμή "
+"στο back office της Alpha Bank πριν εκτελέσετε την παραγγελία."
 
 #: classes/WC_AlphaBank_Gateway_Base.php:355
 msgid "Payment Via Alpha Bank<br />Transaction ID: "
@@ -362,35 +376,35 @@ msgstr ""
 
 #: classes/WC_AlphaBank_Gateway_Base.php:484
 msgid "E-mail address"
-msgstr ""
+msgstr "Διεύθυνση email"
 
 #: classes/WC_AlphaBank_Gateway_Base.php:485
 msgid "Billing town/city"
-msgstr ""
+msgstr "Πόλη χρέωσης"
 
 #: classes/WC_AlphaBank_Gateway_Base.php:486
 msgid "Billing country / region"
-msgstr ""
+msgstr "Χώρα / Περιοχή χρέωσης"
 
 #: classes/WC_AlphaBank_Gateway_Base.php:487
 msgid "Billing street address"
-msgstr ""
+msgstr "Διεύθυνση χρέωσης"
 
 #: classes/WC_AlphaBank_Gateway_Base.php:488
 msgid "Billing postcode / ZIP"
-msgstr ""
+msgstr "Ταχυδρομικός κώδικας χρέωσης"
 
 #. translators: %s: name of the required checkout field
 #: classes/WC_AlphaBank_Gateway_Base.php:501
 #, php-format
 msgid "%s is a mandatory field!"
-msgstr ""
+msgstr "Το πεδίο «%s» είναι υποχρεωτικό!"
 
 #. translators: %s: payment gateway name
 #: classes/WC_AlphaBank_Gateway_Masterpass.php:18
 #, php-format
 msgid "%s allows you to accept payment through MasterPass."
-msgstr ""
+msgstr "Το %s σας επιτρέπει να δέχεστε πληρωμές μέσω MasterPass."
 
 #: classes/WC_AlphaBank_Gateway_Masterpass.php:65
 msgid "Alpha Bank MasterPass"
@@ -426,6 +440,8 @@ msgstr ""
 msgid ""
 "Alpha Bank Payment Gateway requires WooCommerce to be installed and active."
 msgstr ""
+"Η πύλη πληρωμής Alpha Bank απαιτεί το WooCommerce να είναι εγκατεστημένο και "
+"ενεργό."
 
 #~ msgid ""
 #~ "Alpha bank Payment Gateway allows you to accept payment through various "

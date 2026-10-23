@@ -585,7 +585,8 @@ class WC_AlphaBank_Gateway_Base extends \WC_Payment_Gateway {
 
     public static function encrypt( $message, $key ) {
         if ( mb_strlen( $key, '8bit' ) !== static::ENCRYPTION_KEY_LENGTH ) {
-            throw new \Exception( esc_html( sprintf( 'Needs a %d-bit key! Got %d bytes', static::ENCRYPTION_KEY_LENGTH * 8, mb_strlen( $key, '8bit' ) ) ) );
+            // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped -- Message holds only integers and is never rendered as HTML.
+            throw new \Exception( sprintf( 'Needs a %d-bit key! Got %d bytes', static::ENCRYPTION_KEY_LENGTH * 8, mb_strlen( $key, '8bit' ) ) );
         }
         $ivsize = openssl_cipher_iv_length( static::ENCRYPTION_METHOD );
         $iv     = openssl_random_pseudo_bytes( $ivsize );
@@ -603,7 +604,8 @@ class WC_AlphaBank_Gateway_Base extends \WC_Payment_Gateway {
 
     public static function decrypt( $message, $key ) {
         if ( mb_strlen( $key, '8bit' ) !== static::ENCRYPTION_KEY_LENGTH ) {
-            throw new \Exception( esc_html( sprintf( 'Needs a %d-bit key! Got %d bytes', static::ENCRYPTION_KEY_LENGTH * 8, mb_strlen( $key, '8bit' ) ) ) );
+            // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped -- Message holds only integers and is never rendered as HTML.
+            throw new \Exception( sprintf( 'Needs a %d-bit key! Got %d bytes', static::ENCRYPTION_KEY_LENGTH * 8, mb_strlen( $key, '8bit' ) ) );
         }
         $ivsize     = openssl_cipher_iv_length( static::ENCRYPTION_METHOD );
         $iv         = mb_substr( $message, 0, $ivsize, '8bit' );
