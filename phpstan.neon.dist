@@ -1,0 +1,14 @@
+includes:
+    - phpstan-baseline.neon
+
+parameters:
+    level: 5
+    paths:
+        - wooshop-alpha.php
+        - classes
+    scanFiles:
+        - vendor/php-stubs/woocommerce-stubs/woocommerce-stubs.php
+    bootstrapFiles:
+        - tests/phpstan-bootstrap.php
+    # The plugin header says "Requires PHP: 7.4".
+    phpVersion: 70400

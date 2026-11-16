@@ -1,0 +1,73 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  static:
+    name: Coding standards and static analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - run: composer install --no-interaction --no-progress
+
+      - name: PHPCS
+        run: composer phpcs
+
+      - name: PHPStan
+        run: composer phpstan
+
+  tests:
+    name: Tests on PHP ${{ matrix.php }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # The lowest version the plugin header allows, and the newest release.
+        php: ['7.4', '8.4']
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mysqli, openssl, mbstring
+          coverage: none
+
+      - run: composer install --no-interaction --no-progress
+
+      - name: Syntax check
+        run: composer lint
+
+      - name: Unit tests
+        run: composer test:unit
+
+      - name: Integration tests
+        run: composer test:integration

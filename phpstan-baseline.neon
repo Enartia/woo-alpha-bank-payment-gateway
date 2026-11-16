@@ -1,0 +1,97 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Access to an undefined property WC_Order\:\:\$payment_method\.$#'
+			identifier: property.notFound
+			count: 1
+			path: classes/Application.php
+
+		-
+			message: '#^Call to function method_exists\(\) with WC_Order and ''get_payment_method'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: classes/Application.php
+
+		-
+			message: '#^Action callback returns bool but should not return anything\.$#'
+			identifier: return.void
+			count: 1
+			path: classes/WC_AlphaBank_Gateway.php
+
+		-
+			message: '#^Call to function is_array\(\) with non\-empty\-list\<string\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: classes/WC_AlphaBank_Gateway_Base.php
+
+		-
+			message: '#^Call to method get_id\(\) on an unknown class Papaki\\AlphaBank\\WooCommerce\\WC_Order\.$#'
+			identifier: class.notFound
+			count: 1
+			path: classes/WC_AlphaBank_Gateway_Base.php
+
+		-
+			message: '#^Call to method update_status\(\) on an unknown class Papaki\\AlphaBank\\WooCommerce\\WC_Order\.$#'
+			identifier: class.notFound
+			count: 1
+			path: classes/WC_AlphaBank_Gateway_Base.php
+
+		-
+			message: '#^Method Papaki\\AlphaBank\\WooCommerce\\WC_AlphaBank_Gateway_Base\:\:validate_fields\(\) with return type void returns bool but should not return anything\.$#'
+			identifier: return.void
+			count: 1
+			path: classes/WC_AlphaBank_Gateway_Base.php
+
+		-
+			message: '#^Method Papaki\\AlphaBank\\WooCommerce\\WC_AlphaBank_Gateway_Base\:\:validate_fields\(\) with return type void returns false but should not return anything\.$#'
+			identifier: return.void
+			count: 1
+			path: classes/WC_AlphaBank_Gateway_Base.php
+
+		-
+			message: '#^PHPDoc tag @throws with type Papaki\\AlphaBank\\WooCommerce\\Exception is not subtype of Throwable$#'
+			identifier: throws.notThrowable
+			count: 1
+			path: classes/WC_AlphaBank_Gateway_Base.php
+
+		-
+			message: '#^Parameter \#1 \$args of function get_pages expects array\{child_of\?\: int, sort_order\?\: string, sort_column\?\: string, hierarchical\?\: bool, exclude\?\: array\<int\>, include\?\: array\<int\>, meta_key\?\: string, meta_value\?\: string, \.\.\.\}, ''sort_column\=menu…'' given\.$#'
+			identifier: argument.type
+			count: 1
+			path: classes/WC_AlphaBank_Gateway_Base.php
+
+		-
+			message: '#^Parameter \#1 \$post of function get_permalink expects int\|WP_Post, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: classes/WC_AlphaBank_Gateway_Base.php
+
+		-
+			message: '#^Parameter \#2 \$gmt of function current_time expects bool, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: classes/WC_AlphaBank_Gateway_Base.php
+
+		-
+			message: '#^Parameter \#3 \$order of method Papaki\\AlphaBank\\WooCommerce\\WC_AlphaBank_Gateway_Base\:\:updateStatus\(\) expects Papaki\\AlphaBank\\WooCommerce\\WC_Order, WC_Order given\.$#'
+			identifier: argument.type
+			count: 5
+			path: classes/WC_AlphaBank_Gateway_Base.php
+
+		-
+			message: '#^Parameter \$order of method Papaki\\AlphaBank\\WooCommerce\\WC_AlphaBank_Gateway_Base\:\:updateStatus\(\) has invalid type Papaki\\AlphaBank\\WooCommerce\\WC_Order\.$#'
+			identifier: class.notFound
+			count: 1
+			path: classes/WC_AlphaBank_Gateway_Base.php
+
+		-
+			message: '#^Return type \(void\) of method Papaki\\AlphaBank\\WooCommerce\\WC_AlphaBank_Gateway_Base\:\:validate_fields\(\) should be compatible with return type \(bool\) of method WC_Payment_Gateway\:\:validate_fields\(\)$#'
+			identifier: method.childReturnType
+			count: 1
+			path: classes/WC_AlphaBank_Gateway_Base.php
+
+		-
+			message: '#^Action callback returns bool but should not return anything\.$#'
+			identifier: return.void
+			count: 1
+			path: classes/WC_AlphaBank_Gateway_Masterpass.php

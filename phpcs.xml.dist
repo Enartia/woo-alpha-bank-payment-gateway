@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<ruleset name="Alpha Bank payment gateway">
+    <description>Security, correctness and PHP compatibility checks. Formatting rules are left out: the code base uses four-space indentation, which the WordPress formatting sniffs reject.</description>
+
+    <file>wooshop-alpha.php</file>
+    <file>classes</file>
+    <file>tests</file>
+
+    <arg name="extensions" value="php"/>
+    <arg name="colors"/>
+    <arg value="sp"/>
+
+    <!-- Warnings are reported but only errors fail the run. -->
+    <config name="ignore_warnings_on_exit" value="1"/>
+
+    <!-- The plugin header says "Requires PHP: 7.4" and "Requires at least: 6.4". -->
+    <config name="testVersion" value="7.4-"/>
+    <config name="minimum_wp_version" value="6.4"/>
+    <rule ref="PHPCompatibilityWP"/>
+
+    <rule ref="WordPress.Security"/>
+    <rule ref="WordPress.DB"/>
+    <rule ref="WordPress.WP">
+        <!-- Capital-P check on comments and strings; not a correctness rule. -->
+        <exclude name="WordPress.WP.CapitalPDangit"/>
+    </rule>
+    <rule ref="WordPress.PHP">
+        <exclude name="WordPress.PHP.YodaConditions"/>
+        <!-- Deprecated in WordPressCS 3.3; PHPCompatibility covers it. -->
+        <exclude name="WordPress.PHP.POSIXFunctions"/>
+        <!-- base64 carries the bank digest and the encrypted shared secret. -->
+        <exclude name="WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode"/>
+        <exclude name="WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode"/>
+    </rule>
+
+    <rule ref="WordPress.WP.I18n">
+        <properties>
+            <property name="text_domain" type="array">
+                <element value="woo-alpha-bank-payment-gateway"/>
+            </property>
+        </properties>
+    </rule>
+
+    <!-- Tests run on the command line: they print nothing to a browser and need no nonces. -->
+    <rule ref="WordPress.Security">
+        <exclude-pattern>tests/*</exclude-pattern>
+    </rule>
+    <rule ref="WordPress.DB">
+        <exclude-pattern>tests/*</exclude-pattern>
+    </rule>
+    <rule ref="WordPress.WP.AlternativeFunctions">
+        <exclude-pattern>tests/*</exclude-pattern>
+    </rule>
+    <rule ref="WordPress.WP.GlobalVariablesOverride">
+        <exclude-pattern>tests/*</exclude-pattern>
+    </rule>
+</ruleset>

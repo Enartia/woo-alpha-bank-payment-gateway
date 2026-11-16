@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+    bootstrap="tests/Integration/bootstrap.php"
+    colors="true"
+    convertDeprecationsToExceptions="true"
+    failOnWarning="true"
+    failOnRisky="true"
+    cacheResultFile=".wp-tests/.phpunit-integration.cache"
+>
+    <testsuites>
+        <testsuite name="integration">
+            <directory suffix="Test.php">tests/Integration</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

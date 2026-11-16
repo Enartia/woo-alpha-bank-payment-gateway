@@ -1,0 +1,17 @@
+# Files that stay out of the release package (read by `wp dist-archive` and the WordPress.org deploy action).
+.git
+.github
+.gitignore
+.distignore
+.idea
+.DS_Store
+.wp-tests
+vendor
+tests
+composer.json
+composer.lock
+phpcs.xml.dist
+phpstan.neon.dist
+phpstan-baseline.neon
+phpunit.xml.dist
+phpunit-integration.xml.dist
