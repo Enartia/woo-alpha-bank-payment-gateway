@@ -138,25 +138,7 @@ class WC_AlphaBank_Gateway_Base extends \WC_Payment_Gateway {
             echo wp_kses_post( wpautop( wptexturize( $description ) ) );
         }
 
-        $max_installments       = $this->ab_installments;
-        $installments_variation = $this->ab_installments_variation;
-
-        if ( ! empty( $installments_variation ) ) {
-            $max_installments   = 1; // initialize the max installments
-            $installments_split = explode( ',', $installments_variation );
-            foreach ($installments_split as $value) {
-                $installment = explode( ':', $value );
-                if ( ( is_array( $installment ) && count( $installment ) !== 2 ) ||
-                    ( ! is_numeric( $installment[0] ) || ! is_numeric( $installment[1] ) ) ) {
-                    // not valid rule for installments
-                    continue;
-                }
-
-                if ( $amount >= ( $installment[0] ) ) {
-                    $max_installments = $installment[1];
-                }
-            }
-        }
+        $max_installments = $this->get_max_installments( $amount );
 
         if ( $max_installments > 1 ) {
             $field_id     = esc_attr( $this->id ) . '-card-doseis';
@@ -201,10 +183,8 @@ class WC_AlphaBank_Gateway_Base extends \WC_Payment_Gateway {
 
         $order = new \WC_Order( $order_id );
 
-        $installments = $order->get_meta( '_doseis' );
-        if ( $installments === '' ) {
-            $installments = 1;
-        }
+        // Capped again here, in case the stored count did not come through process_payment().
+        $installments = min( max( 1, (int) $order->get_meta( '_doseis' ) ), $this->get_max_installments( $order->get_total() ) );
 
         $country    = $order->get_billing_country();
         $state_code = $order->get_billing_state();
@@ -300,6 +280,35 @@ class WC_AlphaBank_Gateway_Base extends \WC_Payment_Gateway {
     }
 
     /**
+     * Highest number of installments the merchant allows for an order or cart of this amount.
+     *
+     * With "ab_installments_variation" filled ("80:2, 160:4"), the highest count whose minimum the amount reaches
+     * applies and "ab_installments" is ignored, as the settings page describes. Checkout shows this many
+     * options, and process_payment() and the bank form cap a posted or stored count to it.
+     *
+     * @param float|string $amount Order or cart total.
+     * @return int Between 1 and 24.
+     */
+    public function get_max_installments( $amount ) {
+        $max = (int) $this->ab_installments;
+
+        if ( $this->ab_installments_variation !== '' ) {
+            $max = 1;
+            foreach ( explode( ',', $this->ab_installments_variation ) as $rule ) {
+                $parts = array_map( 'trim', explode( ':', $rule ) );
+                if ( count( $parts ) !== 2 || ! is_numeric( $parts[0] ) || ! is_numeric( $parts[1] ) ) {
+                    continue;
+                }
+                if ( (float) $amount >= (float) $parts[0] ) {
+                    $max = max( $max, (int) $parts[1] );
+                }
+            }
+        }
+
+        return min( 24, max( 1, $max ) );
+    }
+
+    /**
      * @param int $order_id
      * @return array
      */
@@ -309,7 +318,7 @@ class WC_AlphaBank_Gateway_Base extends \WC_Payment_Gateway {
         $doseis     = isset( $_POST[ $doseis_key ] ) ? absint( wp_unslash( $_POST[ $doseis_key ] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing -- WooCommerce verifies the checkout or Store API nonce before it calls process_payment().
 
         if ( $doseis > 0 ) {
-            $this->generic_add_meta( $order_id, '_doseis', $doseis );
+            $this->generic_add_meta( $order_id, '_doseis', min( $doseis, $this->get_max_installments( $order->get_total() ) ) );
         }
 
         return array(

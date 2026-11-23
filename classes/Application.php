@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Application {
     public const PLUGIN_TITLE = 'Payment Gateway – nexi Alpha Bank for WooCommerce';
     public const TEXT_DOMAIN  = 'woo-alpha-bank-payment-gateway';
-    public const VERSION      = '2.2.1';
+    public const VERSION      = '2.2.2';
 
     private $entrypoint_path;
 
@@ -44,15 +44,14 @@ class Application {
     }
 
     public function message() {
-        $order_id = absint( get_query_var( 'order-received' ) );
-        $order    = new \WC_Order( $order_id );
-        if ( method_exists( $order, 'get_payment_method' ) ) {
-            $payment_method = $order->get_payment_method();
-        } else {
-            $payment_method = $order->payment_method;
+        if ( ! is_order_received_page() ) {
+            return;
         }
 
-        if ( 'alphabank_gateway' === $payment_method && is_order_received_page() ) {
+        // wc_get_order() returns false for an unknown id, where new WC_Order() throws and the page gives a 500.
+        $order = wc_get_order( absint( get_query_var( 'order-received' ) ) );
+
+        if ( $order && 'alphabank_gateway' === $order->get_payment_method() ) {
             $alphabank_message = $order->get_meta( '_alphabank_message', true );
 
             if ( ! empty( $alphabank_message ) ) {

@@ -4,7 +4,7 @@ Author URI: https://www.papaki.com
 Tags: ecommerce, woocommerce, payment gateway, alphabank, alpha
 Tested up to: 7.1
 Requires at least: 6.4
-Stable tag: 2.2.1
+Stable tag: 2.2.2
 WC tested up to: 11.2.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -45,6 +45,10 @@ In order to enable MasterPass you should go to Woocommerce Payment methods and e
 
 
 == Changelog ==
+
+= 2.2.2 =
+* Fix: the order-received page no longer gives an error (HTTP 500) for an unknown order number.
+* The number of installments follows the configured maximum for the order amount.
 
 = 2.2.1 =
 Security: bank responses are now rejected unless signed with the configured secret and matching the order's gateway, amount and currency.
